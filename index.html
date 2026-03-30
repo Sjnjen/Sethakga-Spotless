@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Sethakga Spotless | Smart Booking Wizard</title>
+  <title>Sethakga Spotless | Smart Booking with Prices</title>
   <!-- Google Fonts + Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -13,14 +14,12 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: 'Inter', sans-serif;
       background-color: #fffafc;
       color: #2d2f36;
       scroll-behavior: smooth;
     }
-
     :root {
       --pink-primary: #e91e63;
       --pink-soft: #ff80ab;
@@ -29,14 +28,11 @@
       --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
       --shadow-md: 0 20px 35px -12px rgba(233, 30, 99, 0.15);
     }
-
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 28px;
     }
-
-    /* navigation */
     nav {
       background: white;
       position: sticky;
@@ -92,12 +88,6 @@
       font-weight: 600;
       transition: 0.2s;
     }
-    .btn-cta:hover {
-      background: var(--pink-dark);
-      transform: translateY(-2px);
-    }
-
-    /* hero & other sections (keep same as before but I'll condense for brevity) */
     .hero {
       display: flex;
       flex-wrap: wrap;
@@ -167,8 +157,35 @@
       font-weight: 800;
       color: var(--pink-primary);
     }
-
-    /* Form wizard */
+    /* pricing cards */
+    .pricing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    .price-card {
+      background: white;
+      border-radius: 32px;
+      padding: 24px;
+      flex: 1;
+      min-width: 200px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      border-top: 5px solid var(--pink-primary);
+    }
+    .price-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+    .price-card .price {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--pink-primary);
+      margin: 10px 0;
+    }
+    /* wizard same as before */
     .wizard-container {
       background: linear-gradient(145deg, #ffffff, #fff5f8);
       border-radius: 48px;
@@ -233,24 +250,12 @@
       border: 1px solid #ffcddf;
       font-family: inherit;
       background: white;
-      transition: 0.2s;
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--pink-primary);
-      box-shadow: 0 0 0 3px rgba(233,30,99,0.2);
     }
     .radio-group {
       display: flex;
       gap: 24px;
       flex-wrap: wrap;
       margin-top: 8px;
-    }
-    .radio-group label {
-      font-weight: normal;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
     }
     .btn-nav {
       display: flex;
@@ -300,12 +305,14 @@
       font-weight: 600;
       color: var(--pink-dark);
     }
-    .service-badge {
+    .pricing-note {
+      text-align: center;
       background: var(--pink-light);
-      padding: 12px 20px;
-      border-radius: 40px;
-      margin-bottom: 20px;
+      border-radius: 60px;
+      padding: 10px 20px;
+      margin-top: 20px;
       display: inline-block;
+      width: auto;
     }
     footer {
       background: #1e1a1c;
@@ -313,6 +320,7 @@
       padding: 48px 0 28px;
       border-radius: 48px 48px 0 0;
       margin-top: 60px;
+      text-align: center;
     }
     .whatsapp-float {
       position: fixed;
@@ -332,7 +340,6 @@
     }
     @media (max-width: 700px) {
       .hero-text h1 { font-size: 2rem; }
-      .step-indicator { gap: 15px; }
     }
   </style>
 </head>
@@ -360,7 +367,7 @@
       <div class="hero-text">
         <div class="badge"><i class="fas fa-sparkle"></i> Spotless since 2019</div>
         <h1>Your home & office <span>sparkles</span> with Sethakga</h1>
-        <p>Deep cleaning, trusted maids, carpet & upholstery care, pest control, and even mobile braiding — all in Midrand & Gauteng.</p>
+        <p>Deep cleaning, trusted maids, carpet & upholstery care, pest control, and mobile braiding — all in Midrand & Gauteng.</p>
         <button class="btn-primary" id="scrollToWizard"><i class="fas fa-calendar-check"></i> Start booking wizard</button>
       </div>
       <div class="hero-stats">
@@ -371,10 +378,27 @@
     </div>
   </div>
 
-  <!-- Wizard Section -->
+  <!-- PRICING SECTION (now with all explicit prices) -->
+  <div class="container" id="pricing">
+    <h2 style="text-align:center; font-size:2.4rem; margin-top:40px;">Transparent <span style="color:#e91e63;">pricing</span></h2>
+    <div class="pricing-grid">
+      <div class="price-card"><h3>🧹 Once‑off Maid</h3><div class="price">R400 / day</div><p>General cleaning, ironing, laundry<br>Client supplies materials</p><small>Upfront payment required</small></div>
+      <div class="price-card"><h3>📅 Bi‑Weekly</h3><div class="price">R400 / visit</div><p>2 visits per month</p></div>
+      <div class="price-card"><h3>🗓️ Once a week</h3><div class="price">R380 / visit</div><p>4 visits per month</p></div>
+      <div class="price-card"><h3>⚡ Twice a week</h3><div class="price">R360 / visit</div><p>8 visits per month</p></div>
+      <div class="price-card"><h3>🌟 Thrice a week</h3><div class="price">R330 / visit</div><p>12 visits per month</p></div>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+      <div class="pricing-note"><i class="fas fa-home"></i> Deep Cleaning: from R1500+ (all supplies included, 6+ hrs team)</div>
+      <div class="pricing-note"><i class="fas fa-cut"></i> Mobile Braiding: from R250 per style (deposit required)</div>
+      <div class="pricing-note"><i class="fas fa-bug"></i> Pest Control: quote based on property size</div>
+    </div>
+  </div>
+
+  <!-- WIZARD (full booking) -->
   <div class="container" id="wizard">
     <div class="wizard-container">
-      <h2 style="text-align:center; margin-bottom:20px;">✨ Detailed service request</h2>
+      <h2 style="text-align:center; margin-bottom:20px;">✨ Book your service in 4 steps</h2>
       <div class="step-indicator">
         <div class="step active" data-step="1"><span class="circle">1</span> Service type</div>
         <div class="step" data-step="2"><span class="circle">2</span> Details</div>
@@ -383,7 +407,7 @@
       </div>
 
       <form id="wizardForm">
-        <!-- STEP 1: Service type -->
+        <!-- STEP 1 -->
         <div class="form-step active-step" id="step1">
           <div class="form-group">
             <label>Which type of service? *</label>
@@ -396,7 +420,7 @@
           <div class="btn-nav"><button type="button" class="btn-primary" id="nextStep1">Next →</button></div>
         </div>
 
-        <!-- STEP 2: dynamic fields based on service type -->
+        <!-- STEP 2: dynamic -->
         <div class="form-step" id="step2">
           <div id="dynamicFields"></div>
           <div class="btn-nav">
@@ -405,9 +429,9 @@
           </div>
         </div>
 
-        <!-- STEP 3: Extras & dates (shared) -->
+        <!-- STEP 3: extras & dates -->
         <div class="form-step" id="step3">
-          <div class="form-group"><label>Do you require Pest Control Services?</label><select id="pestControl"><option value="">Select</option><option value="Yes">Yes – Include in quotation</option><option value="No">No – Cleaning only</option></select></div>
+          <div class="form-group"><label>Do you require Pest Control Services?</label><select id="pestControl"><option value="">Select</option><option value="Yes – include in quote">Yes – include in quote</option><option value="No">No – cleaning only</option></select></div>
           <div class="form-group"><label>Number of carpets, couches (indicate seater size), curtains, headboards?</label><textarea id="extras" rows="2" placeholder="e.g., 2x 3-seater couches, 1x carpet, 4x curtains"></textarea></div>
           <div class="form-group"><label>Additional notes for the crew / fairy</label><textarea id="additionalNotes" rows="2" placeholder="Special instructions, access details..."></textarea></div>
           <div class="form-group"><label>On which date do you need the service? *</label><input type="date" id="serviceDate" required></div>
@@ -415,7 +439,7 @@
           <div class="btn-nav"><button type="button" class="btn-outline" id="prevStep3">← Back</button><button type="button" class="btn-primary" id="nextStep3">Next →</button></div>
         </div>
 
-        <!-- STEP 4: Billing & consent -->
+        <!-- STEP 4: billing & consent -->
         <div class="form-step" id="step4">
           <div class="form-group"><label>Will you be responsible for billing and payments?</label><div class="radio-group"><label><input type="radio" name="billing" value="Yes" required> Yes</label><label><input type="radio" name="billing" value="No"> No</label></div></div>
           <div class="form-group"><label>Client Consent & Confirmation</label><label style="font-weight:normal;"><input type="checkbox" id="consentCheck" required> I have read, understood, and agree to The Sethakga Group service terms as per my request.</label></div>
@@ -425,7 +449,7 @@
     </div>
   </div>
 
-  <!-- Rest of website content (services, pricing, contact - simplified but present) -->
+  <!-- Services summary and contact -->
   <div class="container" id="services">
     <h2 style="font-size:2rem; text-align:center;">Our signature services</h2>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; margin:40px 0;">
@@ -446,28 +470,25 @@
 
 <footer>
   <div class="container">
-    <div style="text-align:center;">© 2025 Sethakga Spotless — Excellence in every detail</div>
+    <div>© 2025 Sethakga Spotless — Excellence in every detail | Prices inclusive of VAT where applicable</div>
   </div>
 </footer>
 
 <a href="https://wa.me/27729249068?text=Hi%20Sethakga!" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-<!-- Loading overlay -->
 <div id="loadingOverlay" class="loading-overlay">
   <div class="loader"></div>
   <div class="bubbles"><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div></div>
-  <div class="loading-text">Scheduling your sparkle ✨</div>
-  <div style="font-size:0.9rem;">Preparing your quote...</div>
+  <div class="loading-text">Preparing your sparkling quote ✨</div>
+  <div style="font-size:0.9rem;">One moment please...</div>
 </div>
 
 <script>
-  // DOM elements
   const steps = document.querySelectorAll('.form-step');
   const stepIndicators = document.querySelectorAll('.step');
   let currentStep = 1;
   let selectedService = null;
 
-  // Field definitions for each service type (based on Google Form screenshots)
   const serviceFields = {
     deep_cleaning: `
       <div class="form-group"><label>What is the current condition of the property? *</label><select id="propertyCondition" required><option value="">Select</option><option value="Occupied">Occupied</option><option value="Post construction">Post construction</option><option value="Empty house">Empty house</option><option value="Post Renovations">Post Renovations</option><option value="Post pest control">Post pest control</option></select></div>
@@ -475,50 +496,48 @@
       <div class="form-group"><label>Type of property?</label><select id="propertyType"><option value="Stand-alone house">Stand-alone house</option><option value="Apartment building">Apartment building</option><option value="Office space">Office space</option></select></div>
       <div class="form-group"><label>Number of floors?</label><select id="floors"><option value="Single storey">Single storey</option><option value="Double storey">Double storey</option><option value="Three storey">Three storey</option></select></div>
       <div class="form-group"><label>Post Renovations workscope (if applicable)</label><textarea id="renovationScope" rows="2" placeholder="Dust removal, windows, kitchen, bathroom, etc."></textarea></div>
+      <div class="pricing-note" style="width:100%; text-align:center;">💰 Deep Cleaning from R1500+ (50% deposit secures booking)</div>
     `,
     maid_services: `
       <div class="form-group"><label>Number of bedrooms? *</label><input type="number" id="bedroomsMaid" required placeholder="e.g., 2"></div>
       <div class="form-group"><label>Type of property to be cleaned? *</label><select id="propertyTypeMaid" required><option value="">Select</option><option value="Stand-alone house">Stand-alone house</option><option value="Apartment building">Apartment building</option><option value="Office space">Office space</option></select></div>
       <div class="form-group"><label>Number of floors? *</label><select id="floorsMaid" required><option value="">Select</option><option value="Single storey">Single storey</option><option value="Double storey">Double storey</option><option value="Three storey">Three storey</option></select></div>
       <div class="form-group"><label>Preferred maid package (optional)</label><select id="maidPackage"><option value="">Select plan</option><option value="Once-off R400/day">Once-off R400/day</option><option value="Bi-Weekly R400/visit">Bi-Weekly R400/visit</option><option value="Once a week R380/visit">Once a week R380/visit</option><option value="Twice a week R360/visit">Twice a week R360/visit</option><option value="Thrice a week R330/visit">Thrice a week R330/visit</option></select></div>
+      <div class="pricing-note" style="width:100%; text-align:center;">📋 Maid packages: as per our transparent pricing table</div>
     `,
     braiding: `
       <div class="form-group"><label>Which hairstyle would you like to book? *</label><select id="hairstyle" required><option value="">Select style</option><option value="Cornrows">Cornrows</option><option value="Halfmoon">Halfmoon</option><option value="Lemonade">Lemonade</option><option value="Goddess (boho)">Goddess (boho)</option><option value="French curls">French curls</option><option value="Knotless">Knotless</option><option value="Box braids">Box braids</option><option value="Twist">Twist</option></select></div>
       <div class="form-group"><label>Hair length / additional details</label><textarea id="hairDetails" rows="2" placeholder="e.g., shoulder length, color preference, etc."></textarea></div>
       <div class="form-group"><label>Address for mobile braiding *</label><input type="text" id="braidingAddress" required placeholder="Full address, Midrand/Gauteng"></div>
-      <div class="form-group"><small><i class="fas fa-info-circle"></i> Deposit required to secure booking. Access to water & electricity needed.</small></div>
+      <div class="pricing-note" style="width:100%; text-align:center;">💇‍♀️ Braiding from R250 – deposit required to secure booking</div>
     `
   };
 
   function updateStep2Fields() {
-    const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
-    let service = null;
-    for (let radio of serviceRadios) if (radio.checked) service = radio.value;
-    selectedService = service;
+    const radios = document.querySelectorAll('input[name="serviceType"]');
+    for (let r of radios) if (r.checked) selectedService = r.value;
     const container = document.getElementById('dynamicFields');
-    if (service && serviceFields[service]) {
-      container.innerHTML = serviceFields[service];
+    if (selectedService && serviceFields[selectedService]) {
+      container.innerHTML = serviceFields[selectedService];
     } else {
       container.innerHTML = '<p style="color:red;">Please select a service type first.</p>';
     }
   }
 
-  // Navigation
   function showStep(step) {
-    steps.forEach((s, idx) => { s.classList.toggle('active-step', idx+1 === step); });
-    stepIndicators.forEach((ind, idx) => { ind.classList.toggle('active', idx+1 === step); });
+    steps.forEach((s, idx) => s.classList.toggle('active-step', idx+1 === step));
+    stepIndicators.forEach((ind, idx) => ind.classList.toggle('active', idx+1 === step));
     currentStep = step;
   }
 
-  document.getElementById('nextStep1')?.addEventListener('click', () => {
+  document.getElementById('nextStep1').addEventListener('click', () => {
     const selected = document.querySelector('input[name="serviceType"]:checked');
     if (!selected) { alert('Please select a service type'); return; }
     updateStep2Fields();
     showStep(2);
   });
-  document.getElementById('prevStep2')?.addEventListener('click', () => showStep(1));
-  document.getElementById('nextStep2')?.addEventListener('click', () => {
-    // Basic validation for required fields inside step2 dynamic fields
+  document.getElementById('prevStep2').addEventListener('click', () => showStep(1));
+  document.getElementById('nextStep2').addEventListener('click', () => {
     let missing = false;
     if (selectedService === 'deep_cleaning') {
       if (!document.getElementById('propertyCondition')?.value) missing = true;
@@ -531,28 +550,23 @@
       if (!document.getElementById('hairstyle')?.value) missing = true;
       if (!document.getElementById('braidingAddress')?.value) missing = true;
     }
-    if (missing) { alert('Please fill all required fields (marked with *)'); return; }
+    if (missing) { alert('Please fill all required fields'); return; }
     showStep(3);
   });
-  document.getElementById('prevStep3')?.addEventListener('click', () => showStep(2));
-  document.getElementById('nextStep3')?.addEventListener('click', () => {
-    const date = document.getElementById('serviceDate').value;
-    if (!date) { alert('Please select a preferred date'); return; }
+  document.getElementById('prevStep3').addEventListener('click', () => showStep(2));
+  document.getElementById('nextStep3').addEventListener('click', () => {
+    if (!document.getElementById('serviceDate').value) { alert('Please select a preferred date'); return; }
     showStep(4);
   });
-  document.getElementById('prevStep4')?.addEventListener('click', () => showStep(3));
+  document.getElementById('prevStep4').addEventListener('click', () => showStep(3));
 
-  // Submit with fancy loading
   const form = document.getElementById('wizardForm');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const consent = document.getElementById('consentCheck').checked;
-    if (!consent) { alert('You must agree to the service terms.'); return; }
-    // Gather all data into a WhatsApp message
+    if (!document.getElementById('consentCheck').checked) { alert('You must agree to the service terms.'); return; }
     let message = "📋 *Sethakga Service Request* 📋\n";
     const serviceType = document.querySelector('input[name="serviceType"]:checked')?.value;
     message += `*Service:* ${serviceType === 'deep_cleaning' ? 'Deep Cleaning' : serviceType === 'maid_services' ? 'Maid Services' : 'Mobile Braiding'}\n`;
-    // collect fields depending on service
     if (serviceType === 'deep_cleaning') {
       message += `*Condition:* ${document.getElementById('propertyCondition')?.value}\n*Bedrooms:* ${document.getElementById('bedrooms')?.value}\n*Property type:* ${document.getElementById('propertyType')?.value}\n*Floors:* ${document.getElementById('floors')?.value}\n*Renovation scope:* ${document.getElementById('renovationScope')?.value || 'N/A'}\n`;
     } else if (serviceType === 'maid_services') {
@@ -560,12 +574,9 @@
     } else if (serviceType === 'braiding') {
       message += `*Hairstyle:* ${document.getElementById('hairstyle')?.value}\n*Hair details:* ${document.getElementById('hairDetails')?.value || 'N/A'}\n*Address:* ${document.getElementById('braidingAddress')?.value}\n`;
     }
-    // shared fields step3 & 4
     message += `*Pest Control:* ${document.getElementById('pestControl')?.value}\n*Extras:* ${document.getElementById('extras')?.value || 'None'}\n*Notes:* ${document.getElementById('additionalNotes')?.value || 'None'}\n*Preferred date:* ${document.getElementById('serviceDate')?.value}\n*Alternative date:* ${document.getElementById('altDate')?.value || 'None'}\n*Billing responsible:* ${document.querySelector('input[name="billing"]:checked')?.value}\n*Consent:* Agreed\n`;
-    // Show loading
     const loader = document.getElementById('loadingOverlay');
     loader.style.display = 'flex';
-    // Simulate loading for 2 seconds then redirect to WhatsApp
     setTimeout(() => {
       const whatsappMsg = encodeURIComponent(message);
       window.open(`https://wa.me/27729249068?text=${whatsappMsg}`, '_blank');
@@ -573,15 +584,13 @@
       alert('Your request has been sent! Sethakga will reply shortly on WhatsApp.');
       form.reset();
       showStep(1);
-      // reset radio
       document.querySelectorAll('input[name="serviceType"]').forEach(r => r.checked = false);
     }, 1800);
   });
 
-  document.getElementById('scrollToWizard')?.addEventListener('click', () => {
+  document.getElementById('scrollToWizard').addEventListener('click', () => {
     document.getElementById('wizard').scrollIntoView({ behavior: 'smooth' });
   });
-  // Smooth scroll for nav
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
