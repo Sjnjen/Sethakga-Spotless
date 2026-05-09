@@ -1,0 +1,87 @@
+// File: pricing.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sethakga Spotless | Pricing - Transparent Rates</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .pricing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin: 60px 0;
+    }
+    .price-card {
+      background: white;
+      border-radius: 32px;
+      padding: 28px 20px;
+      flex: 1;
+      min-width: 220px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      border-top: 5px solid var(--pink-primary);
+      transition: transform 0.2s;
+    }
+    .price-card:hover { transform: translateY(-8px); }
+    .price-card h3 { font-size: 1.6rem; margin-bottom: 12px; }
+    .price-card .price { font-size: 2rem; font-weight: 800; color: var(--pink-primary); margin: 10px 0; }
+    .pricing-note {
+      background: var(--pink-light);
+      border-radius: 60px;
+      padding: 12px 28px;
+      margin: 20px auto;
+      display: inline-block;
+      width: auto;
+    }
+    .info-section {
+      background: white;
+      border-radius: 40px;
+      padding: 40px;
+      margin: 40px 0;
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+  <div id="main-header"></div>
+  <main class="container">
+    <h1 style="font-size: 2.8rem; text-align:center; margin-top: 40px;">Transparent <span style="color:#e91e63;">Pricing</span></h1>
+    <p style="text-align:center; max-width:700px; margin:10px auto;">No hidden fees. Upfront rates for all our premium services.</p>
+    
+    <div class="pricing-grid">
+      <div class="price-card"><h3>🧹 Once‑off Maid</h3><div class="price">R400 / day</div><p>General cleaning, ironing, laundry<br>Client supplies materials</p><small>Upfront payment required</small></div>
+      <div class="price-card"><h3>📅 Bi‑Weekly</h3><div class="price">R400 / visit</div><p>2 visits per month</p></div>
+      <div class="price-card"><h3>🗓️ Once a week</h3><div class="price">R380 / visit</div><p>4 visits per month</p></div>
+      <div class="price-card"><h3>⚡ Twice a week</h3><div class="price">R360 / visit</div><p>8 visits per month</p></div>
+      <div class="price-card"><h3>🌟 Thrice a week</h3><div class="price">R330 / visit</div><p>12 visits per month</p></div>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+      <div class="pricing-note"><i class="fas fa-home"></i> Deep Cleaning: from R1500+ (all supplies included, 6+ hrs team)</div>
+      <div class="pricing-note"><i class="fas fa-cut"></i> Mobile Braiding: from R250 per style (deposit required)</div>
+      <div class="pricing-note"><i class="fas fa-bug"></i> Pest Control: quote based on property size</div>
+    </div>
+
+    <div class="info-section">
+      <h2 style="color: #e91e63;">What's included in Deep Cleaning?</h2>
+      <ul style="columns: 2; list-style: none; margin-top: 20px;">
+        <li><i class="fas fa-check-circle" style="color:#e91e63;"></i> Kitchen degreasing & appliances</li>
+        <li><i class="fas fa-check-circle" style="color:#e91e63;"></i> Bathroom deep scrub & sanitizing</li>
+        <li><i class="fas fa-check-circle" style="color:#e91e63;"></i> Window cleaning inside & out</li>
+        <li><i class="fas fa-check-circle" style="color:#e91e63;"></i> Carpet & upholstery shampoo</li>
+        <li><i class="fas fa-check-circle" style="color:#e91e63;"></i> Dusting all surfaces & skirting</li>
+        <li><i class="fas fa-check-circle" style="color:#e91e63;"></i> Post-construction dust removal</li>
+      </ul>
+    </div>
+  </main>
+  <footer><div class="container">© 2025 Sethakga Spotless — Excellence in every detail</div></footer>
+  <a href="https://wa.me/27729249068?text=Hi%20Sethakga!" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <script src="shared.js"></script>
+  <script>fetch('shared-header.html').then(res=>res.text()).then(data=>document.getElementById('main-header').innerHTML=data);</script>
+</body>
+</html>
