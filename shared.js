@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   link.rel = 'shortcut icon';
   // Create a dataURL simple circle icon with S
   // Use uploaded logo as favicon
-link.href = "logo.png";
+link.href = "Gemini_Generated_Image_vz9w8evz9w8evz9w.png";
   document.head.appendChild(link);
   
   // Add smooth page transitions (simulate loading screen on internal links)
