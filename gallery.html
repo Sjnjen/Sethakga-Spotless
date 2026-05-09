@@ -1,0 +1,75 @@
+// File: gallery.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sethakga Spotless | Gallery - Our Transformations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin: 50px 0;
+    }
+    .gallery-item {
+      background: white;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+    .gallery-item:hover { transform: scale(1.02); box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2); }
+    .gallery-item img, .gallery-item video {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-caption { padding: 16px; text-align: center; font-weight: 500; background: #fff0f5; }
+    .section-title { text-align: center; font-size: 2rem; margin: 30px 0 10px; color: #2d2f36; border-left: 5px solid #e91e63; padding-left: 20px; display: inline-block; }
+    hr { margin: 40px 0; border: 1px solid #ffe0e8; }
+    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-item { animation: fadeSlideUp 0.6s ease forwards; }
+  </style>
+</head>
+<body>
+  <div id="main-header"></div>
+  <main class="container">
+    <h1 style="font-size:2.8rem; text-align:center; margin-top:30px;">Our Work <span style="color:#e91e63;">Gallery</span></h1>
+    <p style="text-align:center;">Real results from real homes — sparkling clean, beautiful braids, and pest-free spaces.</p>
+    
+    <h2 class="section-title"><i class="fas fa-video"></i> Video Showreels</h2>
+    <div class="gallery-grid" id="videosGrid">
+      <!-- 5 videos -->
+      <div class="gallery-item animate-item"><video controls poster="https://placehold.co/600x400/ffe4ec/e91e63?text=Deep+Cleaning+Preview"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video><div class="gallery-caption">✨ Deep Cleaning Transformation</div></div>
+      <div class="gallery-item animate-item"><video controls poster="https://placehold.co/600x400/ffe4ec/e91e63?text=Braiding+Service"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video><div class="gallery-caption">💇‍♀️ Mobile Braiding - Knotless Style</div></div>
+      <div class="gallery-item animate-item"><video controls poster="https://placehold.co/600x400/ffe4ec/e91e63?text=Maid+Service"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video><div class="gallery-caption">🧹 Weekly Maid Service in Action</div></div>
+      <div class="gallery-item animate-item"><video controls poster="https://placehold.co/600x400/ffe4ec/e91e63?text=Upholstery+Cleaning"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video><div class="gallery-caption">🛋️ Upholstery Deep Clean</div></div>
+      <div class="gallery-item animate-item"><video controls poster="https://placehold.co/600x400/ffe4ec/e91e63?text=Pest+Control"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video><div class="gallery-caption">🐜 Pest Control Treatment</div></div>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-camera"></i> Photo Highlights</h2>
+    <div class="gallery-grid" id="photosGrid">
+      <!-- 5 images from placeholder images (replace with actual when ready) -->
+      <div class="gallery-item"><img src="https://placehold.co/600x400/ffb6c1/ffffff?text=Before+After+Kitchen" alt="Kitchen cleaning"><div class="gallery-caption">Kitchen Sparkle</div></div>
+      <div class="gallery-item"><img src="https://placehold.co/600x400/ffb6c1/ffffff?text=Braided+Hair+Style" alt="Braiding result"><div class="gallery-caption">Goddess Braids</div></div>
+      <div class="gallery-item"><img src="https://placehold.co/600x400/ffb6c1/ffffff?text=Carpet+Cleaning" alt="Carpet"><div class="gallery-caption">Carpet Revival</div></div>
+      <div class="gallery-item"><img src="https://placehold.co/600x400/ffb6c1/ffffff?text=Happy+Home" alt="Clean home"><div class="gallery-caption">Spotless Living Room</div></div>
+      <div class="gallery-item"><img src="https://placehold.co/600x400/ffb6c1/ffffff?text=Window+Cleaning" alt="Windows"><div class="gallery-caption">Streak-Free Windows</div></div>
+    </div>
+    <div style="background:#fce4ec; border-radius:48px; padding:30px; text-align:center; margin:40px 0;">
+      <i class="fas fa-smile-wink" style="font-size:2rem; color:#e91e63;"></i>
+      <h3>Ready for your own transformation?</h3>
+      <a href="booking.html" class="btn-primary" style="display:inline-block; margin-top:12px;">Book Today & Get a Free Quote</a>
+    </div>
+  </main>
+  <footer><div class="container">© 2025 Sethakga Spotless — See the difference</div></footer>
+  <a href="https://wa.me/27729249068?text=Hi%20Sethakga!" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <script src="shared.js"></script>
+  <script>fetch('shared-header.html').then(res=>res.text()).then(data=>document.getElementById('main-header').innerHTML=data);</script>
+</body>
+</html>
