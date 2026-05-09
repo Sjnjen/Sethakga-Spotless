@@ -6,18 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   link.type = 'image/x-icon';
   link.rel = 'shortcut icon';
   // Create a dataURL simple circle icon with S
-  const canvas = document.createElement('canvas');
-  canvas.width = 32;
-  canvas.height = 32;
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#e91e63';
-  ctx.beginPath();
-  ctx.arc(16, 16, 14, 0, 2 * Math.PI);
-  ctx.fill();
-  ctx.fillStyle = 'white';
-  ctx.font = 'bold 20px "Inter"';
-  ctx.fillText('S', 10, 24);
-  link.href = canvas.toDataURL();
+  // Use uploaded logo as favicon
+link.href = "logo.png";
   document.head.appendChild(link);
   
   // Add smooth page transitions (simulate loading screen on internal links)
