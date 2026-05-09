@@ -1,0 +1,82 @@
+// File: booking.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sethakga Spotless | Smart Booking Wizard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .wizard-container {
+      background: linear-gradient(145deg, #ffffff, #fff5f8);
+      border-radius: 48px;
+      padding: 40px 32px;
+      margin: 60px 0;
+      box-shadow: var(--shadow-md);
+    }
+    .step-indicator { display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap; }
+    .step { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #aaa; }
+    .step.active { color: var(--pink-primary); }
+    .step .circle { width: 32px; height: 32px; background: #eee; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+    .step.active .circle { background: var(--pink-primary); color: white; }
+    .form-step { display: none; animation: fadeIn 0.3s ease; }
+    .form-step.active-step { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+    .form-group { margin-bottom: 24px; }
+    .radio-group { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 8px; }
+    input, select, textarea { width: 100%; padding: 14px 18px; border-radius: 28px; border: 1px solid #ffcddf; font-family: inherit; }
+    .btn-nav { display: flex; justify-content: space-between; margin-top: 32px; }
+    .pricing-note { background: var(--pink-light); border-radius: 60px; padding: 10px 20px; text-align: center; width: 100%; }
+  </style>
+</head>
+<body>
+  <div id="main-header"></div>
+  <div class="container" id="wizard">
+    <div class="wizard-container">
+      <h2 style="text-align:center;">✨ Book your service in 4 steps</h2>
+      <div class="step-indicator">
+        <div class="step active" data-step="1"><span class="circle">1</span> Service</div>
+        <div class="step" data-step="2"><span class="circle">2</span> Details</div>
+        <div class="step" data-step="3"><span class="circle">3</span> Extras</div>
+        <div class="step" data-step="4"><span class="circle">4</span> Submit</div>
+      </div>
+      <form id="wizardForm">
+        <div class="form-step active-step" id="step1">
+          <div class="form-group"><label>Which type of service? *</label><div class="radio-group"><label><input type="radio" name="serviceType" value="deep_cleaning" required> Deep Cleaning</label><label><input type="radio" name="serviceType" value="maid_services"> Maid Services</label><label><input type="radio" name="serviceType" value="braiding"> Mobile Braiding</label></div></div>
+          <div class="btn-nav"><button type="button" class="btn-primary" id="nextStep1">Next →</button></div>
+        </div>
+        <div class="form-step" id="step2"><div id="dynamicFields"></div><div class="btn-nav"><button type="button" class="btn-outline" id="prevStep2">← Back</button><button type="button" class="btn-primary" id="nextStep2">Next →</button></div></div>
+        <div class="form-step" id="step3">
+          <div class="form-group"><label>Pest Control?</label><select id="pestControl"><option value="">Select</option><option value="Yes – include quote">Yes – include quote</option><option value="No">No</option></select></div>
+          <div class="form-group"><label>Carpets, couches, curtains?</label><textarea id="extras" rows="2" placeholder="e.g., 2x 3-seater couches, 1x carpet"></textarea></div>
+          <div class="form-group"><label>Preferred date *</label><input type="date" id="serviceDate" required></div>
+          <div class="btn-nav"><button type="button" class="btn-outline" id="prevStep3">← Back</button><button type="button" class="btn-primary" id="nextStep3">Next →</button></div>
+        </div>
+        <div class="form-step" id="step4">
+          <div class="form-group"><label>Billing responsible?</label><div class="radio-group"><label><input type="radio" name="billing" value="Yes" required> Yes</label><label><input type="radio" name="billing" value="No"> No</label></div></div>
+          <div class="form-group"><label><input type="checkbox" id="consentCheck" required> I agree to The Sethakga Group service terms.</label></div>
+          <div class="btn-nav"><button type="button" class="btn-outline" id="prevStep4">← Back</button><button type="submit" class="btn-primary">📋 Send request</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="loadingOverlay" class="loading-overlay"><div class="loader"></div><div class="bubbles"><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div></div><div class="loading-text">Preparing your sparkling quote ✨</div></div>
+  <footer><div class="container">© 2025 Sethakga Spotless</div></footer>
+  <a href="https://wa.me/27729249068?text=Hi%20Sethakga!" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <script src="shared.js"></script>
+  <script>
+    fetch('shared-header.html').then(res=>res.text()).then(data=>document.getElementById('main-header').innerHTML=data);
+    // Wizard logic (same as original but simplified)
+    let currentStep=1, selectedService=null;
+    const serviceFields={deep_cleaning:`<div class="form-group"><label>Property condition*</label><select id="propertyCondition" required><option>Occupied</option><option>Post construction</option></select></div><div class="form-group"><label>Bedrooms *</label><input type="number" id="bedrooms" required></div><div class="pricing-note">Deep Cleaning from R1500+</div>`,maid_services:`<div class="form-group"><label>Bedrooms *</label><input type="number" id="bedroomsMaid" required></div><div class="form-group"><label>Property type</label><select id="propertyTypeMaid"><option>Stand-alone house</option><option>Apartment</option></select></div>`,braiding:`<div class="form-group"><label>Hairstyle*</label><select id="hairstyle" required><option>Cornrows</option><option>Knotless</option><option>Box braids</option></select></div><div class="form-group"><label>Address*</label><input id="braidingAddress" required></div>`};
+    function showStep(step){document.querySelectorAll('.form-step').forEach((s,i)=>s.classList.toggle('active-step',i+1===step));document.querySelectorAll('.step').forEach((s,i)=>s.classList.toggle('active',i+1===step));currentStep=step;}
+    document.getElementById('nextStep1').onclick=()=>{let r=document.querySelector('input[name="serviceType"]:checked');if(!r){alert('Select service');return;}selectedService=r.value;document.getElementById('dynamicFields').innerHTML=serviceFields[selectedService]||'';showStep(2);};
+    document.getElementById('prevStep2').onclick=()=>showStep(1);
+    document.getElementById('nextStep2').onclick=()=>{if((selectedService==='deep_cleaning'&&!document.getElementById('bedrooms')?.value)||(selectedService==='maid_services'&&!document.getElementById('bedroomsMaid')?.value)||(selectedService==='braiding'&&!document.getElementById('braidingAddress')?.value)){alert('Fill required fields');return;}showStep(3);};
+    document.getElementById('prevStep3').onclick=()=>showStep(2);document.getElementById('nextStep3').onclick=()=>{if(!document.getElementById('serviceDate').value){alert('Pick date');return;}showStep(4);};document.getElementById('prevStep4').onclick=()=>showStep(3);
+    document.getElementById('wizardForm').onsubmit=async(e)=>{e.preventDefault();if(!document.getElementById('consentCheck').checked){alert('Agree to terms');return;}let msg="📋 Sethakga Request\nService: "+selectedService+"\nDate: "+document.getElementById('serviceDate').value+"\nExtras: "+document.getElementById('extras').value;document.getElementById('loadingOverlay').style.display='flex';setTimeout(()=>{window.open(`https://wa.me/27729249068?text=${encodeURIComponent(msg)}`,'_blank');document.getElementById('loadingOverlay').style.display='none';alert('Sent! Sethakga will reply.');},1500);};
+  </script>
+</body>
+</html>
