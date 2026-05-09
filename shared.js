@@ -1,5 +1,3 @@
-// File: shared.js
-// Shared JS for loading animations, smooth scroll, and favicon logo circle
 document.addEventListener('DOMContentLoaded', () => {
   // Add custom favicon circle with logo message
   let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
